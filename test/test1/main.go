@@ -3,23 +3,30 @@ package main
 import (
 	"fmt"
 	"net-analyser/layers"
+	"os"
 	"time"
 )
 
 func main() {
-	//filePath := "test/test1/day8.pcap"
-	// 单线程 230M 0.277288  cost: 0.263168
+	// 单线程 230M 270ms
+	// 单线程 500M  不写文件 cost: 3295 ms  写文件 8-10秒
+	// 写文件并发 9-10秒
 	start := time.Now()
 
-	filePath := "test/test1/3.pcap"
+	if len(os.Args) < 2 {
+		fmt.Fprintf(os.Stderr, "no filePath parameters")
+	}
+	filePath := os.Args[1:2][0]
+
+	//filePath := "test/test1/2.pcap"
 	reader, err := layers.CreatePacketReaderFromFile(filePath)
 	if err != nil {
 		fmt.Println(err)
 	}
 
 	//i := 1
-	reader.ReadPackets()
+	_ = reader.ReadPackets()
 
-	fmt.Printf("cost: %d ms", time.Since(start).Milliseconds())
+	fmt.Printf("cost: %d ms\n", time.Since(start).Milliseconds())
 
 }
