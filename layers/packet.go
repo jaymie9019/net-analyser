@@ -62,7 +62,9 @@ type Packet struct {
 	metadata *Metadata
 
 	layers []Layer
-	last   Layer
+
+	layerMap map[LayerType]Layer
+	last     Layer
 
 	// 各个层
 	link        LinkLayer
@@ -76,10 +78,11 @@ type SimplePacket struct {
 	Packet
 }
 
-func CreatePacket(Metadata *Metadata, data []byte, firstLayerDecoder Decoder) DataPacket {
+func CreatePacket(Metadata *Metadata, data []byte) DataPacket {
 	dataPacket := &SimplePacket{}
 	dataPacket.metadata = Metadata
 	dataPacket.data = data
+	dataPacket.layerMap = make(map[LayerType]Layer, 4)
 	return dataPacket
 }
 
@@ -115,6 +118,7 @@ func (p *Packet) SetApplicationLayer(l ApplicationLayer) {
 
 func (p *Packet) AddLayer(l Layer) {
 	p.layers = append(p.layers, l)
+	p.layerMap[l.LayerType()] = l
 	p.last = l
 }
 
@@ -161,10 +165,14 @@ func (p *Packet) ApplicationLayer() ApplicationLayer {
 }
 
 func (p *Packet) Layer(t LayerType) Layer {
-	for _, l := range p.layers {
-		if l.LayerType() == t {
-			return l
-		}
+	//for _, l := range p.layers {
+	//	if l.LayerType() == t {
+	//		return l
+	//	}
+	//}
+	//return nil
+	if value, ok := p.layerMap[t]; ok {
+		return value
 	}
 	return nil
 }

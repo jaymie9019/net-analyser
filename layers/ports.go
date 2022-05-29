@@ -3010,7 +3010,7 @@ var udpPortNames = map[UDPPort]string{
 	3356:  "upnotifyps",
 	3357:  "adtech-test",
 	3358:  "mpsysrmsvr",
-	3359:  "wg-netforce",
+	3359:  "Wg-netforce",
 	3360:  "kv-server",
 	3361:  "kv-agent",
 	3362:  "dj-ilm",

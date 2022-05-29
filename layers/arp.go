@@ -12,7 +12,6 @@ const (
 	ARPReply   = 2
 )
 
-// ARP is a ARP packet header.
 type ARP struct {
 	BaseLayer
 	AddrType          LinkType

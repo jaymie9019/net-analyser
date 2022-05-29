@@ -7,6 +7,7 @@ import (
 	"golang.org/x/sys/unix"
 	"os"
 	"strings"
+	"sync"
 )
 
 func mmapRead(filePath string) ([]byte, error) {
@@ -45,9 +46,14 @@ func CreatePacketReaderFromFile(filePath string) (*PacketReader, error) {
 	return &PacketReader{
 		pcapHeader.LinkType,
 		byteOrder,
-		make(chan DataPacket, 200),
+		make(chan DataPacket, 2000),
 		// 去掉 pcap header 的 24 个字节
 		bytes[24:],
+		sync.WaitGroup{},
+		sync.WaitGroup{},
+		sync.WaitGroup{},
+		sync.WaitGroup{},
+		sync.WaitGroup{},
 	}, nil
 }
 
