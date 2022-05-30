@@ -4,6 +4,11 @@ cd 到对应的目录中 `cd /net-analyser/analyser/test1`
 
 然后 build `go build -o main  main.go`  -o 后面的可执行文件名随意
 
+如果要指定平台，比如说linux，参考这条
+
+`CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main main.go`
+
+
 然后运行程序即可 
 
 ```bash
