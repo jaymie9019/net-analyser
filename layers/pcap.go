@@ -50,10 +50,6 @@ func CreatePacketReaderFromFile(filePath string) (*PacketReader, error) {
 		// 去掉 pcap header 的 24 个字节
 		bytes[24:],
 		sync.WaitGroup{},
-		sync.WaitGroup{},
-		sync.WaitGroup{},
-		sync.WaitGroup{},
-		sync.WaitGroup{},
 	}, nil
 }
 

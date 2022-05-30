@@ -7,17 +7,11 @@ import (
 	"net"
 )
 
-// Ethernet is the layer for Ethernet frame headers.
 type Ethernet struct {
 	BaseLayer
 	SrcMAC, DstMAC net.HardwareAddr
 	EthernetType   EthernetType
-	// Length is only set if a length field exists within this header.  Ethernet
-	// headers follow two different standards, one that uses an EthernetType, the
-	// other which defines a length the follows with a LLC header (802.3).  If the
-	// former is the case, we set EthernetType and Length stays 0.  In the latter
-	// case, we set Length and EthernetType = EthernetTypeLLC.
-	Length uint16
+	Length         uint16
 }
 
 func (eth *Ethernet) String() string {

@@ -5,6 +5,7 @@ import (
 	"strconv"
 )
 
+// 模块加载的时候初始化各种枚举类型
 func init() {
 	LinkTypeMetadata = make(map[LinkType]EnumMetadata)
 	EthernetTypeMetadata = make(map[EthernetType]EnumMetadata)

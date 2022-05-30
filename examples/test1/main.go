@@ -12,13 +12,14 @@ func main() {
 	// 单线程 500M  不写文件 cost: 3295 ms  写文件 8-10秒
 	// 写文件并发 9-10秒
 	start := time.Now()
+	fmt.Printf("start working %s\n", start.Format(layers.ChinaDateFormat))
 
 	if len(os.Args) < 2 {
 		fmt.Fprintf(os.Stderr, "no filePath parameters")
 	}
 	filePath := os.Args[1:2][0]
 
-	//filePath := "test/test1/2.pcap"
+	//filePath := "examples/test1/2.pcap"
 	reader, err := layers.CreatePacketReaderFromFile(filePath)
 	if err != nil {
 		fmt.Println(err)

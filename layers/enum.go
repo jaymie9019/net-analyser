@@ -1,7 +1,6 @@
 package layers
 
-// LinkType is an enumeration of link types, and acts as a decoder for any
-// link type it supports.
+// LinkType 链路层协议类型
 type LinkType uint8
 
 const (

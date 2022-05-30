@@ -16,10 +16,6 @@ type PacketReader struct {
 	c         chan DataPacket
 	data      []byte
 	Wg        sync.WaitGroup
-	arpWg     sync.WaitGroup
-	ipWg      sync.WaitGroup
-	udpWg     sync.WaitGroup
-	dnsWg     sync.WaitGroup
 }
 
 const (

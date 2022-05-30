@@ -3,18 +3,13 @@ package layers
 import "fmt"
 
 type Decoder interface {
-	// Decode decodes the bytes of a Packet, sending decoded values and other
-	// information to PacketBuilder, and returning an error if unsuccessful.  See
-	// the PacketBuilder documentation for more details.
+	// 对于字节数组进行解析，各种 协议需要自行实现
 	Decode([]byte, PacketBuilder) error
 }
 
-// DecodeFunc wraps a function to make it a Decoder.
 type DecodeFunc func([]byte, PacketBuilder) error
 
-// Decode implements Decoder by calling itself.
 func (d DecodeFunc) Decode(data []byte, p PacketBuilder) error {
-	// function, call thyself.
 	return d(data, p)
 }
 
